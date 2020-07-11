@@ -1,0 +1,10 @@
+body {
+  font-size: 18px;
+  font-family: 'Josefin Sans', sans-serif;
+  background-color: black;
+  /* background-image: url(./assets/codeBG.jpg); */
+}
+
+.hide {
+  display: none;
+}
