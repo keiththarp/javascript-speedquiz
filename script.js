@@ -1,36 +1,37 @@
-var startScreen = document.getElementById("start-screen");
-var endScreen = document.getElementById("end-screen");
-var quizScreen = document.getElementById("quiz-screen");
-var startButton = document.getElementById("start");
-const timerDisplay = document.querySelector("#timer-display")
+// var startScreen = document.getElementById("start-screen");
+// var endScreen = document.getElementById("end-screen");
+// var quizScreen = document.getElementById("quiz-screen");
+const startButton = document.querySelector("#start");
+const timerDisplay = document.querySelector("#timer-display");
 
-startButton.addEventListener("click", startGame);
-var index = 0;
+startButton.addEventListener("click", countDown);
+
+// var index = 0;
 
 // Building the timer
-
-
 let startTime = 180;
-const countDown = setInterval(function () {
-  startTime -= 1;
+function countDown() {
+  setInterval(function () {
+    startTime -= 1;
 
-  let minutes = Math.floor(startTime / 60);
-  let seconds = Math.floor(startTime % 60);
+    let minutes = Math.floor(startTime / 60);
+    let seconds = Math.floor(startTime % 60);
 
-  // Output the result in an element with id="demo"
-  if (seconds < 10) {
-    timerDisplay.innerHTML = minutes + ":0" + seconds;
-  } else {
-    timerDisplay.innerHTML = minutes + ":" + seconds;
-  }
+    // Output the result in an element with id="demo"
+    if (seconds < 10) {
+      timerDisplay.innerHTML = minutes + ":0" + seconds;
+    } else {
+      timerDisplay.innerHTML = minutes + ":" + seconds;
+    }
 
 
-  // If the count down is over, write some text 
-  if (startTime === 0) {
-    clearInterval(countDown);
-    timerDisplay.innerHTML = "EXPIRED";
-  }
-}, 1000);
+    // If the count down is over, write some text 
+    if (startTime === 0) {
+      clearInterval(countDown);
+      timerDisplay.innerHTML = "EXPIRED";
+    }
+  }, 1000);
+}
 
 var questions = [
   {
