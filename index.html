@@ -21,10 +21,10 @@
       <div class="col-lg-2"></div>
 
       <!-- Main content column -->
-      <div class="col-lg-8 mb-5">
+      <div class="col-lg-8 vh-100">
 
 
-        <main class="card card-style align-items-center">
+        <main class="card card-style align-items-center h-100">
 
           <img width="100%" class="card-img-top" src="./assets/speedquiz-logo.jpg" alt="JavaScript SpeedQuiz logo">
 
@@ -35,10 +35,9 @@
           <!--The welcome screen with instructions-->
           <div class="welcome-box">
             <h1 class="card-title">{QuizRules}</h1>
-            <p>Welcome to {SpeedQuiz} the level 1 JavaScript timed quiz that test your understanding of basic JavaScript
-              coding.</p>
+            <p>Welcome to {SpeedQuiz} the level 1 JavaScript timed quiz.</p>
 
-            <ul class="" aria-label="First group">
+            <ul class="">
               <li><span class="rule-bullet">1</span> There are 5 questions.</li>
               <li><span class="rule-bullet">2</span> The timer begins with 3:00.</li>
               <li><span class="rule-bullet">3</span> Wrong answers deduct :30.</li>
@@ -54,20 +53,28 @@
 
           <!--The quiz screen with questions-->
           <div class="quiz-box hide-card">
+            <div class="quiz-card">
+              <h3 class="card-title mt-2">{<span class="question-header">Place Holder</span>}</h3>
+              <p class="card-text question-text">Place Holder Place Holder Place Holder Place Holder Place Holder Place
+                Holder Place Holder</p>
 
-            <h3 class="card-title">{SpeedQuiz}</h3>
-
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-
-            <ul class="" aria-label="First group">
-              <li><button type="button" class="btn">1</button> There are 5 questions.</li>
-              <li><button type="button" class="btn">2</button> The timer begins with 3:00.</li>
-              <li><button type="button" class="btn">3</button> Wrong answers deduct :30.</li>
-              <li><button type="button" class="btn">4</button> Correct answers add 10 points.</li>
-              <li><button type="button" class="btn">5</button> Remaining time is added to score.</li>
-              <li><button type="button" class="btn">5</button> Add your name to High scores!</li>
-            </ul>
+              <ul class="answer-options" id="answer-list">
+                <li data-option="0"><button type="button" class="btn">1</button>
+                  <span>Place Holder</span>
+                </li>
+                <li data-option="1"><button type="button" class="btn">2</button>
+                  <span>Place Holder</span> </li>
+                <li data-option="2"><button type="button" class="btn">3</button>
+                  <span>Place Holder</span>
+                </li>
+                <li data-option="3"><button type="button" class="btn">4</button>
+                  <span>Place Holder</span>
+                </li>
+                <li data-option="4"><button type="button" class="btn">5</button>
+                  <span>Place Holder</span>
+                </li>
+              </ul>
+            </div>
 
           </div>
 
@@ -79,7 +86,6 @@
 
       <!-- Full screen right layout -->
       <div class="col-lg-2"></div>
-
     </div>
 
   </div>

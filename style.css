@@ -1,8 +1,12 @@
 body {
-  font-size: 18px;
+  font-size: 20px;
   font-family: 'Josefin Sans', sans-serif;
   background-color: black;
   /* background-image: url(./assets/codeBG.jpg); */
+}
+
+h3 {
+  font-size: 1.8em;
 }
 ul {
   list-style-type: none;
@@ -11,7 +15,7 @@ ul {
 }
 
 li {
-  margin: 0px 0px 8px;
+  margin: 0px 0px 15px;
   padding: 0;
 }
 
@@ -62,11 +66,15 @@ main.card-style {
   font-family: 'Anonymous Pro', monospace;
 }
 
-div.button-box, .welcome-box h1, .quiz-box h3 {
+div.button-box, .welcome-box h1,  h3.card-title {
   text-align: center;
   margin: 0px 0px 8px;
 }
 
 div.welcome-box {
   padding: 0px 10px;
+}
+
+div.quiz-card {
+  padding: 10px 15px 0px 10px;
 }
