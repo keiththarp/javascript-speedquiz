@@ -19,6 +19,24 @@ li {
   padding: 0;
 }
 
+li.correct-answer {
+  background-color: #218838;
+  color: white;
+  font-weight: bold;
+}
+span.answer-pad {
+  padding-left: 30px;
+}
+
+li.wrong-answer {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
+.disable-button {
+  pointer-events:none;
+}
+
 button.btn {
   width: 37px;
   background-color: #efdd4f;
@@ -55,6 +73,27 @@ div.display-box {
   margin: 8px 0px;
   padding-top: 2px;
   background-color: black;
+  transition: background-color 1000ms;
+  color: white;
+}
+
+div.correct-display-box {
+  width: 100%;
+  font-size: 30px;
+  text-align: center;
+  margin: 8px 0px;
+  padding-top: 2px;
+  background-color: #218838;
+  color: white;
+}
+
+div.wrong-display-box {
+  width: 100%;
+  font-size: 30px;
+  text-align: center;
+  margin: 8px 0px;
+  padding-top: 2px;
+  background-color: red;
   color: white;
 }
 

@@ -29,7 +29,8 @@
           <img width="100%" class="card-img-top" src="./assets/speedquiz-logo.jpg" alt="JavaScript SpeedQuiz logo">
 
           <div class="display-box">
-            <div>Timer <span class="add-space"> – </span><span class="" id="timer-display">3:00</span></div>
+            <div><span id="display-label"> Timer </span> <span class="add-space"> – </span><span class=""
+                id="timer-display">3:00</span></div>
           </div>
 
           <!--The welcome screen with instructions-->
@@ -38,12 +39,11 @@
             <p>Welcome to {SpeedQuiz} the level 1 JavaScript timed quiz.</p>
 
             <ul class="">
-              <li><span class="rule-bullet">1</span> There are 5 questions.</li>
-              <li><span class="rule-bullet">2</span> The timer begins with 3:00.</li>
-              <li><span class="rule-bullet">3</span> Wrong answers deduct :30.</li>
-              <li><span class="rule-bullet">4</span> Correct answers add 10 points.</li>
-              <li><span class="rule-bullet">5</span> Remaining time is added to score.</li>
-              <li><span class="rule-bullet">6</span> Add your name to High scores!</li>
+              <li><span class="rule-bullet">1</span> There are 5 questions</li>
+              <li><span class="rule-bullet">2</span> Timer begins with 3:00</li>
+              <li><span class="rule-bullet">3</span> Wrong answers deduct :30</li>
+              <li><span class="rule-bullet">4</span> Correct answers add :10</li>
+              <li><span class="rule-bullet">5</span> Remaining time is score</li>
             </ul>
 
             <!-- Card footer -->
@@ -74,6 +74,28 @@
                 <li data-option="4"><button type="button" class="btn" value="4">5</button>
                   <span>Place Holder</span>
                 </li>
+              </ul>
+
+              <!-- Card footer -->
+              <!-- <div class="mt-5 button-box"><button id="next-button" class="btn-warning btn-lg px-5">NEXT</button></p>
+              </div> -->
+
+            </div>
+
+          </div>
+
+          <!--The High Score screen-->
+          <div class="score-box hide-card">
+            <div class="score-card">
+              <h3 class="card-title mt-2">{<span class="question-header">HighScores</span>}</h3>
+              <p class="card-text question-text">Add your initials to the list!</p>
+
+              <ul class="">
+                <li data-option="0"><span class="rule-bullet">1</span> K.S.T.</li>
+                <li data-option="1"><span class="rule-bullet">2</span> F.O.O.</li>
+                <li data-option="2"><span class="rule-bullet">3</span> B.A.R.</li>
+                <li data-option="3"><span class="rule-bullet">4</span> F.I.Z.Z.</li>
+                <li data-option="4"><span class="rule-bullet">5</span> B.U.Z.Z.</li>
               </ul>
 
               <!-- Card footer -->

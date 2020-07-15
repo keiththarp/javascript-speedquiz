@@ -1,14 +1,18 @@
 const nextButton = document.querySelector("#next-button");
+const displayBox = document.querySelector(".display-box");
+const displayLabel = document.querySelector("#display-label");
 const timerDisplay = document.querySelector("#timer-display");
 const questionHeader = document.querySelector(".question-header");
 const questionText = document.querySelector(".question-text");
 const welcomeBox = document.querySelector(".welcome-box");
 const quizBox = document.querySelector(".quiz-box");
+const scoreBox = document.querySelector(".score-box");
 const answerList = document.querySelector("#answer-list");
-const answerListItems = answerList.getElementsByTagName("span");
+const answerListItems = answerList.getElementsByTagName("li");
+const answerTextArea = answerList.getElementsByTagName("span");
+const answerButton = answerList.getElementsByTagName("button");
 let questionIncrement = 0;
-
-
+let currentAnswer = 0;
 
 
 // Building the timer
@@ -80,10 +84,10 @@ function askQuestions() {
   questionHeader.textContent = questions[questionIncrement].questionNumber;
   questionText.textContent = questions[questionIncrement].question;
 
-  for (j = 0; j < answerListItems.length; j++) {
+  for (let j = 0; j < answerTextArea.length; j++) {
 
-    // answerListItems[j].textContent = questions[i].options[j];
-    answerListItems[j].innerHTML = questions[questionIncrement].options[j];
+    // answerTextArea[j].textContent = questions[i].options[j];
+    answerTextArea[j].innerHTML = questions[questionIncrement].options[j];
   }
 
 }
@@ -92,6 +96,7 @@ answerList.addEventListener("click", function () {
   console.log(event.target);
   const button = event.target;
   console.log(button.value);
+  currentAnswer = button.value;
   if (button.matches("button")) {
 
     if (button.value === questions[questionIncrement].answer) {
@@ -106,13 +111,36 @@ answerList.addEventListener("click", function () {
 
 
 function correctAnswer() {
-  alert("That's correct!!");
-  nextQuestion();
+  answerList.setAttribute("class", "disable-button");
+  answerListItems[currentAnswer].setAttribute("class", "correct-answer");
+  answerTextArea[currentAnswer].setAttribute("class", "answer-pad");
+  displayBox.setAttribute("class", "correct-display-box");
+  startTime += 10;
+  answerTextArea[currentAnswer].textContent = " CORRECT!!"
+  setTimeout(function () {
+    answerListItems[currentAnswer].removeAttribute("class", "correct-answer");
+    answerTextArea[currentAnswer].removeAttribute("class", "answer-pad");
+    displayBox.setAttribute("class", "display-box");
+    answerList.removeAttribute("class", "disable-button");
+    nextQuestion();
+  }, 1100);
+
 }
 
 function wrongAnswer() {
-  alert("That's wrong!!");
-  nextQuestion();
+  answerList.setAttribute("class", "disable-button");
+  answerListItems[currentAnswer].setAttribute("class", "wrong-answer");
+  answerTextArea[currentAnswer].setAttribute("class", "answer-pad");
+  displayBox.setAttribute("class", "wrong-display-box");
+  startTime -= 30;
+  answerTextArea[currentAnswer].textContent = " INCORRECT!!"
+  setTimeout(function () {
+    answerListItems[currentAnswer].removeAttribute("class", "wrong-answer");
+    answerTextArea[currentAnswer].removeAttribute("class", "answer-pad");
+    displayBox.setAttribute("class", "display-box");
+    answerList.removeAttribute("class", "disable-button");
+    nextQuestion();
+  }, 1100);
 
 }
 
@@ -120,7 +148,6 @@ function nextQuestion() {
   questionIncrement++;
   if (questionIncrement >= questions.length) {
     clearInterval(countDownInterval);
-    timerDisplay.textContent = startTime;
     endScreen();
   } else {
     askQuestions();
@@ -129,7 +156,10 @@ function nextQuestion() {
 }
 
 function endScreen() {
-  alert("That's the end!")
+  quizBox.setAttribute("class", "hide-card");
+  scoreBox.removeAttribute("class", "hide-card");
+  displayLabel.textContent = "Your Score"
+  timerDisplay.textContent = startTime;
 }
 
 function startQuiz() {
