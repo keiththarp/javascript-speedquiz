@@ -1,4 +1,4 @@
-const startButton = document.querySelector("#start");
+const nextButton = document.querySelector("#next-button");
 const timerDisplay = document.querySelector("#timer-display");
 const questionHeader = document.querySelector(".question-header");
 const questionText = document.querySelector(".question-text");
@@ -6,14 +6,17 @@ const welcomeBox = document.querySelector(".welcome-box");
 const quizBox = document.querySelector(".quiz-box");
 const answerList = document.querySelector("#answer-list");
 const answerListItems = answerList.getElementsByTagName("span");
+let questionIncrement = 0;
 
 
 
 
 // Building the timer
 let startTime = 180;
+let countDownInterval;
+
 function countDown() {
-  setInterval(function () {
+  countDownInterval = setInterval(function () {
     startTime -= 1;
 
     // Format the display for minutes and seconds
@@ -30,7 +33,7 @@ function countDown() {
 
     // If the count down is over, write some text 
     if (startTime < 0) {
-      clearInterval(countDown);
+      clearInterval(countDownInterval);
       timerDisplay.textContent = "EXPIRED";
     }
   }, 1000);
@@ -70,29 +73,63 @@ const questions = [
 ];
 
 function askQuestions() {
+  console.log("first log question increment = " + questionIncrement)
 
-  for (i = 0; i < questions.length; i++) {
-    console.log(questions[i]);
-    questionHeader.textContent = questions[i].questionNumber;
-    questionText.textContent = questions[i].question;
-    for (j = 0; j < answerListItems.length; j++) {
-      console.log(questions[i].answer);
-      // answerListItems[j].textContent = questions[i].options[j];
-      answerListItems[j].innerHTML = questions[i].options[j];
-    }
-    answerList.addEventListener("click", function (event) {
-      event.preventDefault();
-      console.log(event);
-      let element = event.target;
-      if (element.matches("button")) {
-        alert(questions[i].answer);
-      }
+  console.log(questions[questionIncrement]);
 
+  questionHeader.textContent = questions[questionIncrement].questionNumber;
+  questionText.textContent = questions[questionIncrement].question;
 
-    })
+  for (j = 0; j < answerListItems.length; j++) {
 
+    // answerListItems[j].textContent = questions[i].options[j];
+    answerListItems[j].innerHTML = questions[questionIncrement].options[j];
   }
 
+}
+answerList.addEventListener("click", function () {
+  console.log(event);
+  console.log(event.target);
+  const button = event.target;
+  console.log(button.value);
+  if (button.matches("button")) {
+
+    if (button.value === questions[questionIncrement].answer) {
+      correctAnswer();
+    } else {
+      wrongAnswer();
+    }
+
+  }
+})
+
+
+
+function correctAnswer() {
+  alert("That's correct!!");
+  nextQuestion();
+}
+
+function wrongAnswer() {
+  alert("That's wrong!!");
+  nextQuestion();
+
+}
+
+function nextQuestion() {
+  questionIncrement++;
+  if (questionIncrement >= questions.length) {
+    clearInterval(countDownInterval);
+    timerDisplay.textContent = startTime;
+    endScreen();
+  } else {
+    askQuestions();
+  }
+
+}
+
+function endScreen() {
+  alert("That's the end!")
 }
 
 function startQuiz() {
@@ -103,7 +140,7 @@ function startQuiz() {
 
 }
 
-startButton.addEventListener("click", startQuiz);
+
 
 /* -- NOTES --
 
