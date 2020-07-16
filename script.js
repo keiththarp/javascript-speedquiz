@@ -11,6 +11,14 @@ const answerList = document.querySelector("#answer-list");
 const answerListItems = answerList.getElementsByTagName("li");
 const answerTextArea = answerList.getElementsByTagName("span");
 const answerButton = answerList.getElementsByTagName("button");
+const highScoreList = document.querySelector("#high-score-list");
+const highScoreListItems = highScoreList.getElementsByTagName("li");
+const highScoreTextArea = highScoreList.querySelectorAll(".name-score");
+const modalBox = document.querySelector(".modal-box");
+const initForm = document.querySelector("#init-form");
+const initOne = document.querySelector("init-1");
+const initTwo = document.querySelector("init-2");
+const initThree = document.querySelector("init-3");
 let questionIncrement = 0;
 let currentAnswer = 0;
 
@@ -73,7 +81,7 @@ const questions = [
     question: "Which of these statement will return a Boolean value?",
     options: ["x < y", "x === y", "x > y", "All of the above", "None of the above"],
     answer: "3"
-  },
+  }
 ];
 
 function askQuestions() {
@@ -155,22 +163,76 @@ function nextQuestion() {
 
 }
 
+
+function tabOver(current, next) {
+  if (current.value.length == 1) {
+    next.focus();
+  }
+}
+
+let highScoreObj = [
+  {
+    initials: "K.S.T.",
+    score: 219
+  },
+  {
+    initials: "F.O.O.",
+    score: 183
+  },
+  {
+    initials: "B.A.R.",
+    score: 102
+  },
+  {
+    initials: "F.I.Z.Z.",
+    score: 28
+  },
+  {
+    initials: "B.U.Z.Z.",
+    score: 1
+  }
+];
+
+function listHighScores() {
+
+  for (let j = 0; j < highScoreTextArea.length; j++) {
+
+    highScoreTextArea[j].innerHTML = " " + highScoreObj[j].initials + " - " + highScoreObj[j].score;
+  }
+};
+
+
+function startQuiz() {
+  countDown();
+  welcomeBox.setAttribute("class", "hide-card");
+  // quizBox.removeAttribute("class", "hide-card");
+  quizBox.setAttribute("class", "show-time");
+  askQuestions();
+
+};
+
 function endScreen() {
   quizBox.setAttribute("class", "hide-card");
   scoreBox.removeAttribute("class", "hide-card");
   displayLabel.textContent = "Your Score"
   timerDisplay.textContent = startTime;
+  listHighScores();
+  console.log(highScoreObj[4].score, typeof (highScoreObj[4].score))
+  if (parseInt(startTime) > highScoreObj[4].score) {
+    modalBox.removeAttribute("class", "hide-card");
+    initForm[0].focus();
+  }
 }
 
-function startQuiz() {
-  countDown();
-  welcomeBox.setAttribute("class", "hide-card");
-  quizBox.removeAttribute("class", "hide-card");
-  askQuestions();
+initForm.addEventListener("submit", function (event) {
+  event.preventDefault();
 
-}
+  let userInitials = initForm[0].value + "." + initForm[1].value + "." + initForm[2].value;
 
+  console.log(userInitials.toUpperCase());
+  modalBox.setAttribute("class", "hide-card");
 
+});
 
 /* -- NOTES --
 

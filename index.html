@@ -54,7 +54,7 @@
 
           <!--The quiz screen with questions-->
           <div class="quiz-box hide-card">
-            <div class="quiz-card">
+            <div class="quiz-card px-5">
               <h3 class="card-title mt-2">{<span class="question-header">Place Holder</span>}</h3>
               <p class="card-text question-text">Place Holder Place Holder Place Holder Place Holder Place Holder Place
                 Holder Place Holder</p>
@@ -84,18 +84,34 @@
 
           </div>
 
+
+
           <!--The High Score screen-->
           <div class="score-box hide-card">
-            <div class="score-card">
+            <div class="score-card px-5">
               <h3 class="card-title mt-2">{<span class="question-header">HighScores</span>}</h3>
-              <p class="card-text question-text">Add your initials to the list!</p>
+              <div class="modal-box hide-card">
+                <div class="modal-card card-body">
+                  <p>Congratulations for making the High Score list!!</p>
+                  <p>Enter your initials to be added to the list.</p>
+                  <form name="initials" id="init-form">
+                    <input type="text" id="init-1" size=1 onkeyup="tabOver(this, document.initials[1])"
+                      onKeyup="tabOver(this, )" maxlength=1>
+                    <input type="text" id="init-2" size=1 onkeyup="tabOver(this, document.initials[2])" maxlength=1>
+                    <input type="text" id="init-3" size=1 onkeyup="tabOver(this, document.initials[3])" maxlength=1>
+                    <button>SUBMIT</button>
+                  </form>
+                </div>
+              </div>
+              <p class="card-text question-text">Beat the top times to be added to the JS {SpeedQuiz} high score list!
+              </p>
 
-              <ul class="">
-                <li data-option="0"><span class="rule-bullet">1</span> K.S.T.</li>
-                <li data-option="1"><span class="rule-bullet">2</span> F.O.O.</li>
-                <li data-option="2"><span class="rule-bullet">3</span> B.A.R.</li>
-                <li data-option="3"><span class="rule-bullet">4</span> F.I.Z.Z.</li>
-                <li data-option="4"><span class="rule-bullet">5</span> B.U.Z.Z.</li>
+              <ul class="" id="high-score-list">
+                <li data-option="0"><span class="rule-bullet">1</span><span class="name-score"> Place Holder</span></li>
+                <li data-option="1"><span class="rule-bullet">2</span><span class="name-score"> Place Holder</span></li>
+                <li data-option="2"><span class="rule-bullet">3</span><span class="name-score"> Place Holder</span></li>
+                <li data-option="3"><span class="rule-bullet">4</span><span class="name-score"> Place Holder</span></li>
+                <li data-option="4"><span class="rule-bullet">5</span><span class="name-score"> Place Holder</span></li>
               </ul>
 
               <!-- Card footer -->
