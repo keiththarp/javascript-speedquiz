@@ -21,6 +21,7 @@ const initTwo = document.querySelector("init-2");
 const initThree = document.querySelector("init-3");
 let questionIncrement = 0;
 let currentAnswer = 0;
+let storedHighScores = JSON.parse(localStorage.getItem("highscores"));
 
 
 // Building the timer
@@ -193,6 +194,8 @@ let highScoreObj = [
   }
 ];
 
+
+
 function listHighScores() {
 
   for (let j = 0; j < highScoreTextArea.length; j++) {
@@ -219,8 +222,11 @@ function endScreen() {
   listHighScores();
   console.log(highScoreObj[4].score, typeof (highScoreObj[4].score))
   if (parseInt(startTime) > highScoreObj[4].score) {
-    modalBox.removeAttribute("class", "hide-card");
-    initForm[0].focus();
+    setTimeout(function () {
+      modalBox.style.display = "block";
+      initForm[0].focus();
+    }, 500);
+
   }
 }
 
@@ -229,10 +235,29 @@ initForm.addEventListener("submit", function (event) {
 
   let userInitials = initForm[0].value + "." + initForm[1].value + "." + initForm[2].value;
 
-  console.log(userInitials.toUpperCase());
-  modalBox.setAttribute("class", "hide-card");
+  userInitials = userInitials.toUpperCase();
+
+  modalBox.style.display = "none";
+  highScoreObj.push({ initials: userInitials, score: startTime });
+  console.log(highScoreObj);
+  localStorage.setItem("highScores", JSON.stringify(highScoreObj));
+  highScoreSort();
+  console.log(highScoreObj);
+  let storedHighScores = JSON.parse(localStorage.getItem("highScores"));
+  console.log(storedHighScores);
+  listHighScores();
 
 });
+function highScoreSort() {
+
+  highScoreObj = highScoreObj.sort((a, b) => {
+    if (a.score < b.score) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+}
 
 /* -- NOTES --
 
