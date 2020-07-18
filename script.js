@@ -285,11 +285,13 @@ function endScreen() {
   listHighScores();
 
   if (parseInt(startTime) > storedHighScores[4].score) {
+    modalBox.setAttribute("class", "modal-start");
     setTimeout(function () {
       // modalBox.style.display = "block";
-      modalBox.setAttribute("class", "modal-reveal")
+      modalBox.setAttribute("class", "modal-reveal");
       initForm[0].focus();
     }, 250);
+
 
   }
 }
