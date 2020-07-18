@@ -273,6 +273,8 @@ initForm.addEventListener("submit", function (event) {
 
   // Write the newly updated high score list to the screen.
   listHighScores();
+  modalBox.setAttribute("class", "hide-card");
+  initForm.reset();
 });
 
 /* Display the High Score screen, write the scores to the screen,
@@ -286,12 +288,11 @@ function endScreen() {
 
   if (parseInt(startTime) > storedHighScores[4].score) {
     modalBox.setAttribute("class", "modal-start");
+    modalBox.style.display = "block";
     setTimeout(function () {
-      // modalBox.style.display = "block";
-      modalBox.setAttribute("class", "modal-reveal");
       initForm[0].focus();
-    }, 250);
-
+      modalBox.setAttribute("class", "modal-reveal");
+    }, 200);
 
   }
 }
