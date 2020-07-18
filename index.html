@@ -4,9 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Bring in some Google fonts for style to match the JS logo font-->
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&display=swap"
     rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&display=swap" rel="stylesheet">
+  <!-- Thank you BootStrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
   <link rel="stylesheet" href="style.css" />
@@ -23,11 +26,11 @@
       <!-- Main content column -->
       <div class="col-lg-8 vh-100">
 
-
         <main class="card card-style align-items-center h-100">
 
           <img width="100%" class="card-img-top" src="./assets/speedquiz-logo.jpg" alt="JavaScript SpeedQuiz logo">
 
+          <!-- The timer and final score display -->
           <div class="display-box">
             <div><span id="display-label"> Timer </span> <span class="add-space"> – </span><span class=""
                 id="timer-display">3:00</span></div>
@@ -35,27 +38,30 @@
 
           <!--The welcome screen with instructions-->
           <div class="welcome-box">
-            <h1 class="card-title">{QuizRules}</h1>
-            <p>Welcome to {SpeedQuiz} the level 1 JavaScript timed quiz.</p>
+            <div class="welcome-card px-5">
+              <h1 class="card-title">{QuizRules}</h1>
+              <p>Welcome to {SpeedQuiz} level 1 timed quiz.</p>
 
-            <ul class="">
-              <li><span class="rule-bullet">1</span> There are 5 questions</li>
-              <li><span class="rule-bullet">2</span> Timer begins with 3:00</li>
-              <li><span class="rule-bullet">3</span> Wrong answers deduct :30</li>
-              <li><span class="rule-bullet">4</span> Correct answers add :10</li>
-              <li><span class="rule-bullet">5</span> Remaining time is score</li>
-            </ul>
+              <!-- Custom bullets for styling -->
+              <ul class="">
+                <li><span class="rule-bullet">1</span> There are 5 questions</li>
+                <li><span class="rule-bullet">2</span> Timer begins with 3:00</li>
+                <li><span class="rule-bullet">3</span> Wrong answers deduct :30</li>
+                <li><span class="rule-bullet">4</span> Correct answers add :10</li>
+                <li><span class="rule-bullet">5</span> Remaining time is score</li>
+              </ul>
 
-            <!-- Card footer -->
-            <div class="mt-5 button-box"><button onclick="startQuiz()" id="start"
-                class="btn-success btn-lg px-5">START</button></p>
+              <!-- Card footer with start button that calls the first JS function -->
+              <div class="mt-5 button-box"><button onclick="startQuiz()" id="start"
+                  class="btn-success btn-lg px-5">START</button></p>
+              </div>
             </div>
           </div>
 
           <!--The quiz screen with questions-->
           <div class="quiz-box hide-card">
             <div class="quiz-card px-5">
-              <h3 class="card-title mt-2">{<span class="question-header">Place Holder</span>}</h3>
+              <h1 class="card-title mt-2">{<span class="question-header">Place Holder</span>}</h1>
               <p class="card-text question-text">Place Holder Place Holder Place Holder Place Holder Place Holder Place
                 Holder Place Holder</p>
 
@@ -76,33 +82,14 @@
                 </li>
               </ul>
 
-              <!-- Card footer -->
-              <!-- <div class="mt-5 button-box"><button id="next-button" class="btn-warning btn-lg px-5">NEXT</button></p>
-              </div> -->
-
             </div>
 
           </div>
 
-
-
           <!--The High Score screen-->
           <div class="score-box hide-card">
             <div class="score-card px-5">
-              <h3 class="card-title mt-2">{<span class="question-header">HighScores</span>}</h3>
-              <div class="modal-box hide-card">
-                <div class="modal-card card-body">
-                  <p>Congratulations for making the High Score list!!</p>
-                  <p>Enter your initials to be added to the list.</p>
-                  <form name="initials" id="init-form">
-                    <input type="text" id="init-1" size=1 onkeyup="tabOver(this, document.initials[1])"
-                      onKeyup="tabOver(this, )" maxlength=1>
-                    <input type="text" id="init-2" size=1 onkeyup="tabOver(this, document.initials[2])" maxlength=1>
-                    <input type="text" id="init-3" size=1 onkeyup="tabOver(this, document.initials[3])" maxlength=1>
-                    <button>SUBMIT</button>
-                  </form>
-                </div>
-              </div>
+              <h1 class="card-title mt-2">{<span class="question-header">HighScores</span>}</h1>
               <p class="card-text question-text">Beat the top times to be added to the JS {SpeedQuiz} high score list!
               </p>
 
@@ -114,23 +101,41 @@
                 <li data-option="4"><span class="rule-bullet">5</span><span class="name-score"> Place Holder</span></li>
               </ul>
 
-              <!-- Card footer -->
-              <!-- <div class="mt-5 button-box"><button id="next-button" class="btn-warning btn-lg px-5">NEXT</button></p>
-              </div> -->
-
+              <div class="mt-5 button-box"><button onclick="tryAgain()" id="try-again"
+                  class="btn-success btn-lg px-5">Try Again!</button></p>
+              </div>
             </div>
 
           </div>
 
+          <!--The Modal Div-->
+          <div class="modal-box hide-card">
+            <div class="modal-card card-body">
+              <p>Congratulations for making the High Score list!!</p>
+              <p>Enter your initials to be added to the list.</p>
+              <form name="initials" id="init-form">
+                <input type="text" id="init-1" size=1 onkeyup="tabOver(this, document.initials[1])"
+                  onKeyup="tabOver(this, )" maxlength=1>
+                <input type="text" id="init-2" size=1 onkeyup="tabOver(this, document.initials[2])" maxlength=1>
+                <input type="text" id="init-3" size=1 onkeyup="tabOver(this, document.initials[3])" maxlength=1>
+                <button>SUBMIT</button>
+              </form>
+            </div>
+          </div>
 
         </main>
 
-
       </div>
 
-      <!-- Full screen right layout -->
-      <div class="col-lg-2"></div>
+
+
+
+
     </div>
+
+    <!-- Full screen right layout -->
+    <div class="col-lg-2"></div>
+  </div>
 
   </div>
 

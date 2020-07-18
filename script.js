@@ -1,27 +1,38 @@
-const nextButton = document.querySelector("#next-button");
+// Variables for Timer display area
 const displayBox = document.querySelector(".display-box");
 const displayLabel = document.querySelector("#display-label");
 const timerDisplay = document.querySelector("#timer-display");
-const questionHeader = document.querySelector(".question-header");
-const questionText = document.querySelector(".question-text");
-const welcomeBox = document.querySelector(".welcome-box");
+
+// Quiz card elements
 const quizBox = document.querySelector(".quiz-box");
-const scoreBox = document.querySelector(".score-box");
 const answerList = document.querySelector("#answer-list");
+const questionText = document.querySelector(".question-text");
 const answerListItems = answerList.getElementsByTagName("li");
 const answerTextArea = answerList.getElementsByTagName("span");
 const answerButton = answerList.getElementsByTagName("button");
-const highScoreList = document.querySelector("#high-score-list");
-const highScoreListItems = highScoreList.getElementsByTagName("li");
-const highScoreTextArea = highScoreList.querySelectorAll(".name-score");
-const modalBox = document.querySelector(".modal-box");
-const initForm = document.querySelector("#init-form");
+const questionHeader = document.querySelector(".question-header");
+
+// Welcome card elements
+const welcomeBox = document.querySelector(".welcome-box");
+
+//Score card elements
 const initOne = document.querySelector("init-1");
 const initTwo = document.querySelector("init-2");
 const initThree = document.querySelector("init-3");
-let questionIncrement = 0;
+const modalBox = document.querySelector(".modal-box");
+const initForm = document.querySelector("#init-form");
+const scoreBox = document.querySelector(".score-box");
+const highScoreList = document.querySelector("#high-score-list");
+const highScoreListItems = highScoreList.getElementsByTagName("li");
+const highScoreTextArea = highScoreList.querySelectorAll(".name-score");
+
+// Global variables
 let currentAnswer = 0;
-let storedHighScores = JSON.parse(localStorage.getItem("highscores"));
+let questionIncrement = 0;
+
+let storedHighScores = JSON.parse(localStorage.getItem("highScores"));
+
+
 
 
 // Building the timer
@@ -43,15 +54,20 @@ function countDown() {
       timerDisplay.innerHTML = minutes + ":" + seconds;
     }
 
-
-    // If the count down is over, write some text 
+    // End game when timer reaches 0
     if (startTime < 0) {
       clearInterval(countDownInterval);
       timerDisplay.textContent = "EXPIRED";
+      displayBox.setAttribute("class", "wrong-display-box");
+      startTime = 0;
+      endScreen();
     }
   }, 1000);
 }
 
+// *** Quiz Items ***
+
+// Building the question objects array.
 const questions = [
   {
     questionNumber: "QuestionOne",
@@ -85,29 +101,27 @@ const questions = [
   }
 ];
 
+// Run through the question objects array to ask the questions
 function askQuestions() {
-  console.log("first log question increment = " + questionIncrement)
 
-  console.log(questions[questionIncrement]);
-
+  // Write the question title and actual question
   questionHeader.textContent = questions[questionIncrement].questionNumber;
   questionText.textContent = questions[questionIncrement].question;
 
+  // Loop to add the answer options
   for (let j = 0; j < answerTextArea.length; j++) {
-
-    // answerTextArea[j].textContent = questions[i].options[j];
     answerTextArea[j].innerHTML = questions[questionIncrement].options[j];
   }
 
 }
+
+// Adding the listener for the answer option buttons
 answerList.addEventListener("click", function () {
-  console.log(event);
-  console.log(event.target);
   const button = event.target;
-  console.log(button.value);
   currentAnswer = button.value;
   if (button.matches("button")) {
 
+    // Check the answer
     if (button.value === questions[questionIncrement].answer) {
       correctAnswer();
     } else {
@@ -117,15 +131,21 @@ answerList.addEventListener("click", function () {
   }
 })
 
-
-
+// Set up some feedback for the answers
 function correctAnswer() {
+  //Shut the buttons off while the feedback happens.
   answerList.setAttribute("class", "disable-button");
+
+  // Use green to notify user of correct answer
   answerListItems[currentAnswer].setAttribute("class", "correct-answer");
   answerTextArea[currentAnswer].setAttribute("class", "answer-pad");
   displayBox.setAttribute("class", "correct-display-box");
+
+  // Add bonus time for correct answer and display CORRECT!!
   startTime += 10;
   answerTextArea[currentAnswer].textContent = " CORRECT!!"
+
+  // Give some time for the feedback to register before clearing it.
   setTimeout(function () {
     answerListItems[currentAnswer].removeAttribute("class", "correct-answer");
     answerTextArea[currentAnswer].removeAttribute("class", "answer-pad");
@@ -137,12 +157,19 @@ function correctAnswer() {
 }
 
 function wrongAnswer() {
+  //Shut the buttons off while the feedback happens.
   answerList.setAttribute("class", "disable-button");
+
+  // Use green to notify user of correct answer
   answerListItems[currentAnswer].setAttribute("class", "wrong-answer");
   answerTextArea[currentAnswer].setAttribute("class", "answer-pad");
   displayBox.setAttribute("class", "wrong-display-box");
+
+  // Penalize 30 seconds for incorrect answer and display INCORRECT!!
   startTime -= 30;
   answerTextArea[currentAnswer].textContent = " INCORRECT!!"
+
+  // Give some time for the feedback to register before clearing it.
   setTimeout(function () {
     answerListItems[currentAnswer].removeAttribute("class", "wrong-answer");
     answerTextArea[currentAnswer].removeAttribute("class", "answer-pad");
@@ -153,6 +180,7 @@ function wrongAnswer() {
 
 }
 
+// Moving to next question if there is one. Otherwise send to High Score screen
 function nextQuestion() {
   questionIncrement++;
   if (questionIncrement >= questions.length) {
@@ -161,96 +189,59 @@ function nextQuestion() {
   } else {
     askQuestions();
   }
-
 }
 
+// *** High Score Screen ***
 
+// Some filler high scores for fun, this gets called at the start of the game.
+function initHighScoreObj() {
+  // We're only going to fill if the local memory is empty.
+  if (storedHighScores === null) {
+    let highScoreObj = [
+      {
+        initials: "KST",
+        score: 219
+      },
+      {
+        initials: "FOO",
+        score: 103
+      },
+      {
+        initials: "BAR",
+        score: 64
+      },
+      {
+        initials: "FIZ",
+        score: 28
+      },
+      {
+        initials: "BUZ",
+        score: 1
+      }
+    ];
+    // Sending the scores to local memory then bringing them back.
+    localStorage.setItem("highScores", JSON.stringify(highScoreObj));
+    storedHighScores = JSON.parse(localStorage.getItem("highScores"));
+  }
+}
+
+// Writing the high scores to the screen.
+function listHighScores() {
+  for (let j = 0; j < highScoreTextArea.length; j++) {
+    highScoreTextArea[j].innerHTML = " " + storedHighScores[j].initials + " - " + storedHighScores[j].score;
+  }
+};
+
+// Function to assist initials input box by auto tabbing
 function tabOver(current, next) {
   if (current.value.length == 1) {
     next.focus();
   }
 }
 
-let highScoreObj = [
-  {
-    initials: "K.S.T.",
-    score: 219
-  },
-  {
-    initials: "F.O.O.",
-    score: 183
-  },
-  {
-    initials: "B.A.R.",
-    score: 102
-  },
-  {
-    initials: "F.I.Z.Z.",
-    score: 28
-  },
-  {
-    initials: "B.U.Z.Z.",
-    score: 1
-  }
-];
-
-
-
-function listHighScores() {
-
-  for (let j = 0; j < highScoreTextArea.length; j++) {
-
-    highScoreTextArea[j].innerHTML = " " + highScoreObj[j].initials + " - " + highScoreObj[j].score;
-  }
-};
-
-
-function startQuiz() {
-  countDown();
-  welcomeBox.setAttribute("class", "hide-card");
-  // quizBox.removeAttribute("class", "hide-card");
-  quizBox.setAttribute("class", "show-time");
-  askQuestions();
-
-};
-
-function endScreen() {
-  quizBox.setAttribute("class", "hide-card");
-  scoreBox.removeAttribute("class", "hide-card");
-  displayLabel.textContent = "Your Score"
-  timerDisplay.textContent = startTime;
-  listHighScores();
-  console.log(highScoreObj[4].score, typeof (highScoreObj[4].score))
-  if (parseInt(startTime) > highScoreObj[4].score) {
-    setTimeout(function () {
-      modalBox.style.display = "block";
-      initForm[0].focus();
-    }, 500);
-
-  }
-}
-
-initForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  let userInitials = initForm[0].value + "." + initForm[1].value + "." + initForm[2].value;
-
-  userInitials = userInitials.toUpperCase();
-
-  modalBox.style.display = "none";
-  highScoreObj.push({ initials: userInitials, score: startTime });
-  console.log(highScoreObj);
-  localStorage.setItem("highScores", JSON.stringify(highScoreObj));
-  highScoreSort();
-  console.log(highScoreObj);
-  let storedHighScores = JSON.parse(localStorage.getItem("highScores"));
-  console.log(storedHighScores);
-  listHighScores();
-
-});
+// Getting the scores sorted for display.
 function highScoreSort() {
-
-  highScoreObj = highScoreObj.sort((a, b) => {
+  storedHighScores = storedHighScores.sort((a, b) => {
     if (a.score < b.score) {
       return 1;
     } else {
@@ -259,41 +250,72 @@ function highScoreSort() {
   });
 }
 
-/* -- NOTES --
+// Code for high score modal pop-up submit button.
+initForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  modalBox.style.display = "none";
 
-Initial page welcomes student and lays out the details for the quiz.
-- There will be 5 questions
-- Start with a total of three minutes to complete the quiz
-- when start button is clicked, timer starts and first question is displayed.
-- answering question reveals correct answer with color green and incorrect answers in red.
-- if student answers correctly the answer they chose gets a check mark to replace the number.
-- if the student answers incorrectly the number is replaces with an X
+  // Formatting the user's initials for appearance on High Score list.
+  let userInitials = `${initForm[0].value}${initForm[1].value}${initForm[2].value}`;
+  userInitials = userInitials.toUpperCase();
 
+  // Adding the user to the high score array
+  storedHighScores.push({ initials: userInitials, score: startTime });
 
+  // now that the user's initials have been added the scores get sorted.
+  highScoreSort();
 
-## User Story
+  // added this to keep the list only as long as needed. Avoiding excessive local storage.
+  storedHighScores = storedHighScores.slice(0, 6);
 
-```
-AS A coding bootcamp student
-I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-SO THAT I can gauge my progress compared to my peers
-```
+  //Now the new High Score object array gets sent to local storage.
+  localStorage.setItem("highScores", JSON.stringify(storedHighScores));
 
-## Acceptance Criteria
+  // Write the newly updated high score list to the screen.
+  listHighScores();
+});
 
-```
-GIVEN I am taking a code quiz
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and score
+/* Display the High Score screen, write the scores to the screen,
+and determine whether to display the initials modal for user input.*/
+function endScreen() {
+  quizBox.setAttribute("class", "hide-card");
+  scoreBox.removeAttribute("class", "hide-card");
+  displayLabel.textContent = "Your Score"
+  timerDisplay.textContent = startTime;
+  listHighScores();
 
+  if (parseInt(startTime) > storedHighScores[4].score) {
+    setTimeout(function () {
+      // modalBox.style.display = "block";
+      modalBox.setAttribute("class", "modal-reveal")
+      initForm[0].focus();
+    }, 250);
 
+  }
+}
 
-*/
+// Restart the quiz called from HTML, button positioned on high score screen
+function tryAgain() {
+  questionIncrement = 0;
+  displayLabel.textContent = "Timer"
+  startTime = 180;
+  timerDisplay.textContent = "3:00";
+  welcomeBox.setAttribute("class", "welcome-box");
+  scoreBox.setAttribute("class", "hide-card");
+}
+
+/* This is the first function to fire and start the game, 
+called from the HTML, button on welcome screen.*/
+function startQuiz() {
+  // Begin the timer
+  countDown();
+  // Remove the welcome screen and bring up the Quiz screen
+  welcomeBox.setAttribute("class", "hide-card");
+  quizBox.setAttribute("class", "show-time");
+
+  // Call the question populator and check local memory for existing high scores.
+  askQuestions();
+  initHighScoreObj();
+  // Keeping the clear storage helper here for testing
+  // localStorage.clear();
+};

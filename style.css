@@ -2,7 +2,6 @@ body {
   font-size: 20px;
   font-family: 'Josefin Sans', sans-serif;
   background-color: black;
-  /* background-image: url(./assets/codeBG.jpg); */
 }
 
 h3 {
@@ -45,6 +44,7 @@ button.btn {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Styling to mimic buttons */
 span.rule-bullet {
   display: inline-block;
   padding-top: 5px;
@@ -66,6 +66,7 @@ span.add-space {
   padding: 0px 10px 0px 5px;
 }
 
+/* timer and final score box */
 div.display-box {
   width: 100%;
   font-size: 30px;
@@ -77,6 +78,12 @@ div.display-box {
   color: white;
 }
 
+/* font to make timer look like timer */
+#timer-display {
+  font-family: 'Anonymous Pro', monospace;
+}
+
+/* temporary styling to announce correct answer*/
 div.correct-display-box {
   width: 100%;
   font-size: 30px;
@@ -87,6 +94,7 @@ div.correct-display-box {
   color: white;
 }
 
+/* temporary styling to announce incorrect answer*/
 div.wrong-display-box {
   width: 100%;
   font-size: 30px;
@@ -101,23 +109,23 @@ main.card-style {
   border: solid 2px #efdd4f;
 }
 
-#timer-display {
-  font-family: 'Anonymous Pro', monospace;
-}
-
-div.button-box, .welcome-box h1,  h3.card-title {
+div.button-box, .welcome-box h1,  h1.card-title {
   text-align: center;
   margin: 0px 0px 8px;
 }
 
 div.welcome-box {
-  padding: 0px 10px;
+  /* padding: 0px 10px; */
+  display: block;
+  width: 100%;
+  margin-left: 25px;
 }
 
-div.quiz-card {
+div.quiz-card, div.welcome-card {
   padding: 10px 15px 0px 10px;
 }
 
+/* reveal the quiz box */
 div.show-time {
   display: block;
   width: 100%;
@@ -128,18 +136,20 @@ span.name-score {
   font-size: 1.3em;
 }
 
-div.modal-box {
-  display: none;
+/* Styling for the modal backdrop */
+div.modal-reveal {
+  display: block;
   position: fixed;
   z-index: 1;
-  padding-top: 550px; 
+  padding-top: 55px;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%; 
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  overflow: auto;
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+
 }
 
 .modal-card {
