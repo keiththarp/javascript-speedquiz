@@ -2,7 +2,7 @@
 
 Test your basic JavaScript knowledge with SpeedQuiz, the stylish, responsive, fun for the whole family coding quiz! Test your knowledge and track your time against top five SpeedQuiz High Scores. Study up, and quickly try the quiz again with SpeedQuiz's convenient "Try Again" button!!
 
-- View the app here - https://keiththarp.github.io/js-speedquiz/
+- View the app here - https://keiththarp.github.io/javascript-speedquiz/
 
 ![Speed Quiz Logo](./assets/SpeedQuiz-OpenGraph.jpg)
 

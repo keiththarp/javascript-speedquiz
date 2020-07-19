@@ -305,6 +305,7 @@ function tryAgain() {
   timerDisplay.textContent = "3:00";
   welcomeBox.setAttribute("class", "welcome-box");
   scoreBox.setAttribute("class", "hide-card");
+  displayBox.setAttribute("class", "display-box");
 }
 
 /* This is the first function to fire and start the game, 
