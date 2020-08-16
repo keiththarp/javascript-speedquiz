@@ -6,6 +6,11 @@ Test your basic JavaScript knowledge with SpeedQuiz, the stylish, responsive, fu
 
 ![Speed Quiz Logo](./assets/SpeedQuiz-OpenGraph.jpg)
 
+## Technologies Used to Create SpeedQuiz
+* HTML
+* CSS
+* JavaScript
+
 ## Early Steps
 
 I started this project with wanting to be happy with the design as well as the functionality. The SpeedQuiz logo came together and guided the rest of the design. From there I started pseudo coding and working on the logic.
@@ -37,3 +42,28 @@ The overall coding of this project took me longer than I thought it would. I'm s
 * Thanks to Scott, Mike, & Bobby for being a great and ever patient education team!
 * Tons of thanks to the several different study groups that helped keep the problem solving juices flowing this week.
 * Although none of the code in here was directly copied, I found help with several problems from the usual suspects in Stack Overflow and W3 Schools. The jumping off point for the High Scores/Initials modal 'Auto Tab' code was found at http://www.javascriptkit.com/script/script2/autotab.shtml
+  
+    
+    
+## MIT License
+
+Copyright (c)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
