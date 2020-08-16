@@ -37,6 +37,11 @@ The overall coding of this project took me longer than I thought it would. I'm s
 
 - Using the BootStrap framework helps make the design and final product a mobile friendly app from the beginning.
 
+## Weekly Weather Widget was developed by
+- Keith Tharp
+  - KeithSTharp@gmail.com
+  - https://github.com/keiththarp
+
 **Acknowledgments and Credits**
 
 * Thanks to Scott, Mike, & Bobby for being a great and ever patient education team!
